@@ -20,7 +20,6 @@ void print_centre(char arr[13][29], int row, int col){
     //printing in center
     for(int i=0; i<row; i++){
         move_cursor(start_row+i, start_column);
-        /*printf("%s", arr[i]);*/
         for(int j=0; j<col; j++){
             printf("%c", arr[i][j]);
         }        
