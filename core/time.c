@@ -1,12 +1,19 @@
 #include <stdio.h>
 #include <time.h>
 #include <stdbool.h>
+#include <string.h>
+#include <stdlib.h>
+#include <ctype.h>
+
+#define MAX_INPUT 100
 
 // Some helping function declaration, definition is down;
 int compare_time(struct tm* time1, struct tm* time2);
 bool is_leap_year(int year);
 bool is_valid_date(int date[3]);
-
+void remove_extra_spaces(char* str);
+void fill_input_array(int arr[], int n, char* input_string);
+bool take_n_integer_input(int arr[], int n);
 
 
 // Converting in different format functions.
@@ -32,15 +39,15 @@ void print_struct_time(struct tm* time){
 
 
 // Input functions
-time_t input_future_time_left(){
-    int days=-1, hours=-1, minutes=-1;
+time_t input_time_left(){
+    int time_left[3]; // time_left -> 0:day, 1:hour, 2:minutes
     time_t seconds = 0;
     while(seconds<=0){
         seconds = 0;
-        printf("Enter future time : Date, Hours, Minutes respectively : ");
-        scanf("%d%d%d", &days, &hours, &minutes);
-        if(days<10000){
-            seconds = 24*60*60*days + 60*60*hours + 60*minutes; 
+        printf("Enter future time : Days, Hours, Minutes respectively : ");
+        while(!take_n_integer_input(time_left, 3));
+        if(time_left[0] < 10000){
+            seconds = 24*60*60*time_left[0] + 60*60*time_left[1] + 60*time_left[2]; 
         }
     }
     return seconds;
@@ -50,10 +57,7 @@ void input_valid_date(){
     int date[3];
     do{
         printf("Enter Date : dd/mm/yyyy : ");
-        scanf("%d%d%d", &date[0], &date[1], &date[2]);
-        if(!is_valid_date(date)){
-            printf("Enter a valid date...\n");
-        }
+        while(!take_n_integer_input(date, 3));
     }
     while(!is_valid_date(date));
     printf("Valid Date is %d/%d/%d", date[0], date[1], date[2]);
@@ -72,7 +76,7 @@ int main(){
     print_struct_time(curr_time);
     print_epoch_time(currTime);
     // printf("%d", compare_time(curr_time, curr_time));
-    // printf("%ld", input_future_time());
+    /*printf("%ld", input_time_left());*/
     input_valid_date();
     
 
@@ -123,5 +127,72 @@ bool is_valid_date(int date[3]){
     if(date[0] > daysInMonth[date[1]-1]) return false;
 
     //All Conditions Passed
+    return true;
+}
+
+
+void remove_extra_spaces(char* str){
+    int start = 0;
+    int end = strlen(str) - 1;
+
+    while (isspace((unsigned char)str[start])) start++;
+    while (end >= start && isspace((unsigned char)str[end])) end--;
+
+    // Shift actual string to left.
+    for (int i = start; i <= end; i++) {
+        str[i - start] = str[i];
+    }
+
+    // Null terminate the trimmed string.
+    str[end - start + 1] = '\0';
+    return;
+} 
+
+void fill_input_array(int arr[], int n, char* input_string){
+    // Making char array of input_string for strtok();
+    char input_str_char_array[MAX_INPUT];
+    strcpy(input_str_char_array, input_string);
+
+    char* token;
+    int i = 0;
+
+    // Using strtok() to split the string.
+    token = strtok(input_str_char_array, " ");
+    while(token != NULL && i < n){
+        // atoi -> string integer to integer 
+        arr[i] = atoi(token);
+        i++;
+        token = strtok(NULL, " ");
+    }
+
+    return;    
+}
+
+bool take_n_integer_input(int arr[], int n){
+    // Input a string.
+    char* input_string = (char*) malloc(MAX_INPUT * sizeof(char));
+    fgets(input_string, MAX_INPUT, stdin);
+
+    // Remove starting and ending spaces. 
+    char* formatted_input = input_string;
+    remove_extra_spaces(formatted_input);
+
+    // Checking if given input is number only.
+    int string_length = strlen(formatted_input);
+    for(int i=0; i<string_length; i++){
+        if(!((formatted_input[i] >= '0' && formatted_input[i] <= '9') || formatted_input[i] == ' ')) return false;
+    }
+    
+    // Checking if input consist of n integer inputs.
+    int space_count = 0;
+    for(int i=0; i<string_length; i++){
+        if(formatted_input[i] == ' ') space_count++;
+    }
+    if(space_count != n-1) return false;
+
+
+    // Filling the arrray with inputs.
+    fill_input_array(arr, n, formatted_input);
+
     return true;
 }
