@@ -14,6 +14,7 @@ bool is_valid_date(int date[3]);
 void remove_extra_spaces(char* str);
 void fill_input_array(int arr[], int n, char* input_string);
 bool take_n_integer_input(int arr[], int n);
+int* return_array(int arr[], int n);
 
 
 // Converting in different format functions.
@@ -44,7 +45,7 @@ time_t input_time_left(){
     time_t seconds = 0;
     while(seconds<=0){
         seconds = 0;
-        printf("Enter future time : Days, Hours, Minutes respectively : ");
+        /*printf("Enter future time : Days, Hours, Minutes respectively : ");*/
         while(!take_n_integer_input(time_left, 3));
         if(time_left[0] < 10000){
             seconds = 24*60*60*time_left[0] + 60*60*time_left[1] + 60*time_left[2]; 
@@ -52,42 +53,31 @@ time_t input_time_left(){
     }
     return seconds;
 }
-//                                                                                         YOU HAVE TO CHANGE THIS RETURN TYPE!!!!!!
-void input_valid_date(){
+
+
+int* input_valid_date(){
     int date[3];
     do{
         printf("Enter Date : dd/mm/yyyy : ");
         while(!take_n_integer_input(date, 3));
     }
     while(!is_valid_date(date));
-    printf("Valid Date is %d/%d/%d", date[0], date[1], date[2]);
-    return;   
+    /*printf("Valid Date is %d/%d/%d", date[0], date[1], date[2]);*/
+    return return_array(date, 3);   
 }
 
 
+int* input_valid_time(){
+    int time[2];
+    do{
+        printf("Enter date : hh/mm : ");
+        while(!take_n_integer_input(time, 2));
+    }
+    while(!((time[0]<24 && time[0]>=0) && (time[1]<60 && time[1]>=0)));
+    printf("Valid time -> %d:%d", time[0], time[1]);
 
-
-
-
-
-int main(){
-    time_t currTime = time(NULL);
-    struct tm* curr_time = convert_to_struct_tm(currTime);
-    print_struct_time(curr_time);
-    print_epoch_time(currTime);
-    // printf("%d", compare_time(curr_time, curr_time));
-    /*printf("%ld", input_time_left());*/
-    input_valid_date();
-    
-
-
-    return 0;
+    return return_array(time, 2);
 }
-
-
-
-
-
 
 
 
@@ -101,6 +91,16 @@ int compare_time(struct tm* time1, struct tm* time2){
     return t1-t2;
 }
 
+int* return_array(int arr[], int n){
+    int* return_ptr = (int*) malloc(sizeof(int) * n);
+    for(int i=0; i<n; i++){
+        return_ptr[i] = arr[i];
+    }
+    return return_ptr;
+
+}
+
+
 bool is_leap_year(int year){
     //Checking for leap year
     if(year % 400 == 0){
@@ -112,6 +112,7 @@ bool is_leap_year(int year){
     }
     return false;
 }
+
 
 bool is_valid_date(int date[3]){
     //Restrictions added
@@ -143,10 +144,11 @@ void remove_extra_spaces(char* str){
         str[i - start] = str[i];
     }
 
-    // Null terminate the trimmed string.
+    // Null terminate the string.
     str[end - start + 1] = '\0';
     return;
 } 
+
 
 void fill_input_array(int arr[], int n, char* input_string){
     // Making char array of input_string for strtok();
@@ -167,6 +169,7 @@ void fill_input_array(int arr[], int n, char* input_string){
 
     return;    
 }
+
 
 bool take_n_integer_input(int arr[], int n){
     // Input a string.
@@ -196,3 +199,4 @@ bool take_n_integer_input(int arr[], int n){
 
     return true;
 }
+
