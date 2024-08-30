@@ -45,7 +45,6 @@ time_t input_time_left(){
     time_t seconds = 0;
     while(seconds<=0){
         seconds = 0;
-        /*printf("Enter future time : Days, Hours, Minutes respectively : ");*/
         while(!take_n_integer_input(time_left, 3));
         if(time_left[0] < 10000){
             seconds = 24*60*60*time_left[0] + 60*60*time_left[1] + 60*time_left[2]; 
@@ -62,7 +61,6 @@ int* input_valid_date(){
         while(!take_n_integer_input(date, 3));
     }
     while(!is_valid_date(date));
-    /*printf("Valid Date is %d/%d/%d", date[0], date[1], date[2]);*/
     return return_array(date, 3);   
 }
 
@@ -74,7 +72,6 @@ int* input_valid_time(){
         while(!take_n_integer_input(time, 2));
     }
     while(!((time[0]<24 && time[0]>=0) && (time[1]<60 && time[1]>=0)));
-    /*printf("Valid time -> %d:%d", time[0], time[1]);*/
 
     return return_array(time, 2);
 }
@@ -183,7 +180,10 @@ bool take_n_integer_input(int arr[], int n){
     // Checking if given input is number only.
     int string_length = strlen(formatted_input);
     for(int i=0; i<string_length; i++){
-        if(!((formatted_input[i] >= '0' && formatted_input[i] <= '9') || formatted_input[i] == ' ')) return false;
+        if(!((formatted_input[i] >= '0' && formatted_input[i] <= '9') || formatted_input[i] == ' ')){
+            printf("Enter Again\n");
+            return false;
+        }
     }
     
     // Checking if input consist of n integer inputs.
@@ -191,7 +191,10 @@ bool take_n_integer_input(int arr[], int n){
     for(int i=0; i<string_length; i++){
         if(formatted_input[i] == ' ') space_count++;
     }
-    if(space_count != n-1) return false;
+    if(space_count != n-1){
+        printf("Enter Again\n");
+        return false;
+    } 
 
 
     // Filling the arrray with inputs.
