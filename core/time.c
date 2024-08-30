@@ -58,7 +58,7 @@ time_t input_time_left(){
 int* input_valid_date(){
     int date[3];
     do{
-        printf("Enter Date : dd/mm/yyyy : ");
+        printf("Enter Date(dd/mm/yyyy) : ");
         while(!take_n_integer_input(date, 3));
     }
     while(!is_valid_date(date));
@@ -70,11 +70,11 @@ int* input_valid_date(){
 int* input_valid_time(){
     int time[2];
     do{
-        printf("Enter date : hh/mm : ");
+        printf("Enter time(hh/mm) : ");
         while(!take_n_integer_input(time, 2));
     }
     while(!((time[0]<24 && time[0]>=0) && (time[1]<60 && time[1]>=0)));
-    printf("Valid time -> %d:%d", time[0], time[1]);
+    /*printf("Valid time -> %d:%d", time[0], time[1]);*/
 
     return return_array(time, 2);
 }

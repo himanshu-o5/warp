@@ -17,7 +17,7 @@ char homepage(){
         "                            ",
         "Your Option :              ",
     };
-    print_centre(arr, 13, 29);
+    print_centre((char*)arr, 13, 29);
 
     // Getting input
     char ch;
@@ -32,7 +32,7 @@ char homepage(){
         }
 
         // Print Homepage again.
-        print_centre(arr, 13, 29);   
+        print_centre((char*)arr, 13, 29);   
     }
 
     return ch;

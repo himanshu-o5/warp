@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-void print_centre(char arr[13][29], int row, int col){
+void print_centre(char* arr, int row, int col){
     clear_screen();
 
     // Get terminal size
@@ -21,7 +21,7 @@ void print_centre(char arr[13][29], int row, int col){
     for(int i=0; i<row; i++){
         move_cursor(start_row+i, start_column);
         for(int j=0; j<col; j++){
-            printf("%c", arr[i][j]);
+            printf("%c", *(arr + i * col + j));
         }        
     }
     return;
