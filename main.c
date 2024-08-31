@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include "./core/terminal_control.h"
 #include "headers.h"
 
 
@@ -13,7 +12,7 @@ int main(){
             break;
         
         case 'a':
-            printf("Pressed a");
+            add_reminder(); 
             break;
 
         case 'l':

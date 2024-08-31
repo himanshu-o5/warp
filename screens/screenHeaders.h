@@ -5,9 +5,12 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-// If you change anything to homescreen char arr, change here and in print_centre.c file also.
+// print_centre.c headers.
 void print_centre(char* arr, int row, int col);
 
+//sort_both_files.c headers.
+void sort_both_files();
+int conpare_pairs(const void *a, const void *b);
 
 // time.c headers
 #define MAX_INPUT 100
