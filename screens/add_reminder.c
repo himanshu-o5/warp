@@ -48,6 +48,40 @@ time_t get_entered_epoch_time(int* input_date, int* input_time){
 }
 
 
+bool add_reminder_to_file(char* reminder, time_t time) {
+    // File names for storing reminders and time_t values
+    const char* reminder_filename = ".reminder.warp";
+    const char* time_filename = ".time.warp";
+
+    // Open the file for the reminder in append mode
+    FILE *reminder_file = fopen(reminder_filename, "a");
+    if (reminder_file == NULL) {
+        perror("Error opening reminder file");
+        return false;
+    }
+
+    // Open the file for the time in append mode
+    FILE *time_file = fopen(time_filename, "a");
+    if (time_file == NULL) {
+        perror("Error opening time file");
+        fclose(reminder_file); // Close the reminder file if time file fails to open
+        return false;
+    }
+
+    // Write the reminder to the reminder file
+    fprintf(reminder_file, "%s", reminder);
+
+    // Write the time_t value to the time file
+    fprintf(time_file, "%ld", time);
+
+    // Close the files
+    fclose(reminder_file);
+    fclose(time_file);
+
+    return true;
+}
+
+
 
 
 void add_reminder(){
@@ -66,7 +100,7 @@ void add_reminder(){
     
     } while(1);
     
-    time_h entered_epoch_time = get_entered_epoch_time(date, time);
+    time_t entered_epoch_time = get_entered_epoch_time(date, time);
     
     clear_screen();
     move_cursor(3, 0);
@@ -79,7 +113,7 @@ void add_reminder(){
     fgets(reminder, REMINDER_SIZE, stdin);
 
 
-    /*add_reminder_to_file(reminder, entered_epoch_time); */
+    add_reminder_to_file(reminder, entered_epoch_time); 
 
 
     return ;
