@@ -63,6 +63,6 @@ void sort_both_files() {
     fclose(number_file);
     fclose(string_file);
 
-    printf("Files have been sorted and saved.\n");
+    printf("Reminder added!!! Make sure you have warp initialised by \"warp init\"\n");
 }
 

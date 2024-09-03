@@ -20,8 +20,8 @@ time_t get_entered_epoch_time(int* input_date, int* input_time);
 
 bool add_reminder_to_file(char* reminder, time_t time) {
     // File names for storing reminders and time_t values
-    const char* reminder_filename = ".reminder.warp";
-    const char* time_filename = ".time.warp";
+    char* reminder_filename = ".reminder.warp";
+    char* time_filename = ".time.warp";
 
     // Open the file for the reminder in append mode
     FILE *reminder_file = fopen(reminder_filename, "a");

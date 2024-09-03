@@ -57,7 +57,7 @@ time_t input_time_left(){
 int* input_valid_date(){
     int date[3];
     do{
-        printf("Enter Date(dd/mm/yyyy) : ");
+        printf("Enter Date ");
         while(!take_n_integer_input(date, 3));
     }
     while(!is_valid_date(date));
@@ -68,7 +68,7 @@ int* input_valid_date(){
 int* input_valid_time(){
     int time[2];
     do{
-        printf("Enter time(hh/mm) : ");
+        printf("Enter time (hh/mm) : ");
         while(!take_n_integer_input(time, 2));
     }
     while(!((time[0]<24 && time[0]>=0) && (time[1]<60 && time[1]>=0)));
@@ -186,13 +186,16 @@ bool take_n_integer_input(int arr[], int n){
         }
     }
     
+    char* input_format[] = {"(dd/mm/yyyy) : ", "(hh/mm) : "};
+
     // Checking if input consist of n integer inputs.
     int space_count = 0;
     for(int i=0; i<string_length; i++){
         if(formatted_input[i] == ' ') space_count++;
     }
     if(space_count != n-1){
-        printf("Enter Again\n");
+        if(n == 3) printf("%s", input_format[0]);
+        if(n == 2) printf("%s", input_format[1]);
         return false;
     } 
 
