@@ -13,6 +13,14 @@
 // print_centre.c
 void print_centre(char* arr, int row, int col);
 
+// demon_warp.
+void start_warp();
+void handle_demon_process(char* argv[]);
+void make_demon_warp();
+void repeatedly_check_reminder();
+void remove_top_reminder();
+bool kill_demon_warp();
+
 // sort_both_files.c
 void sort_both_files();
 int conpare_pairs(const void *a, const void *b);

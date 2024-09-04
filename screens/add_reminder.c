@@ -87,19 +87,16 @@ void add_reminder(){
         sort_both_files();
     } 
 
+    // Free the allocated memory.
+    free(reminder);
+    free(date);
+    free(time);
+    date = NULL;
+    reminder = NULL;
+    time = NULL;
 
     return ;
 }
-
-/*int main(){*/
-/*    add_reminder();*/
-/**/
-/*    return 0;*/
-/*}*/
-/**/
-
-
-
 
 
 
