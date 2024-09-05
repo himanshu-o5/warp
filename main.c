@@ -35,6 +35,8 @@ void start_warp(){
 
     switch (ch) {
         case 'q':
+            clear_screen();
+            move_cursor(1, 0);
             exit(0);
             break;
 
@@ -44,7 +46,7 @@ void start_warp(){
             break;
 
         case 'l':
-            printf("Pressed l");
+            list_reminders();
             break;
 
         default:

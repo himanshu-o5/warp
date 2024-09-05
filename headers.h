@@ -53,3 +53,7 @@ bool is_future_time(int* input_date, int* input_time);
 time_t get_entered_epoch_time(int* input_date, int* input_time);
 bool add_reminder_to_file(char* reminder, time_t time);
 void add_reminder();
+
+// list_reminders.c 
+void list_reminders();
+void display_side_by_side(FILE *file1, FILE *file2);
