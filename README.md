@@ -6,10 +6,10 @@ Warp is a lightweight and efficient task reminder system written in C, designed 
 
 
 ## Table of Contents
-- Dependencies
-- Getting Started
-- Usage
-- Showcase
+- [Dependencies](https://github.com/himanshu-o5/warp?tab=readme-ov-file#dependencies)
+- [Getting Started]()
+- [Usage](https://github.com/himanshu-o5/warp?tab=readme-ov-file#usage)
+- [Showcase](https://github.com/himanshu-o5/warp?tab=readme-ov-file#showcase)
 
 ## Dependencies
 
@@ -24,7 +24,7 @@ To build and run this project, you will need the following dependencies:
 Make sure you have these dependencies installed before building the project.
 
 
-## Installation
+## Getting Started
 1. Start by cloning this repository to your local machine : 
 
     ```bash
