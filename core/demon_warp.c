@@ -128,11 +128,11 @@ void repeatedly_check_reminder(){
             fclose(file_reminder);
             
             // Create the command string.
-            char notify[] = "notify-send -t 15000 ";;
-            strcat(notify, reminder);
+            char notify[1050];
+            reminder[strcspn(reminder, "\n")] = 0;
+            int result = snprintf(notify, sizeof(notify), "notify-send -t 15000 \"%s\"", reminder);
             // Call the command string.
             system(notify);
-            
 
             //After Successfully reminding, free memory and delete the top reminder. 
             remove_top_reminder(".time.warp"); 

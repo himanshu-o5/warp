@@ -7,7 +7,7 @@ Warp is a lightweight and efficient task reminder system written in C, designed 
 
 ## Table of Contents
 - [Dependencies](https://github.com/himanshu-o5/warp?tab=readme-ov-file#dependencies)
-- [Getting Started]()
+- [Getting Started](https://github.com/himanshu-o5/warp?tab=readme-ov-file#getting-started)
 - [Usage](https://github.com/himanshu-o5/warp?tab=readme-ov-file#usage)
 - [Showcase](https://github.com/himanshu-o5/warp?tab=readme-ov-file#showcase)
 
